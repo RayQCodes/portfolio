@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWWQRPBPB0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Optional (recommended): ensures your own visits are counted even if consent mode isn’t used
+    gtag('config', 'G-TWWQRPBPB0', { 'send_page_view': true });
+  </script>
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raymond Quan - Portfolio</title>
@@ -18,9 +29,15 @@
         <h2>Software Engineer & Software Developer</h2>
         <p>Passionate about software development, creating REST APIs, and building reliable applications. Actively seeking software engineering internship opportunities.</p>
         <div class="header-buttons">
-          <a href="raymonds resume.pdf" target="_blank" class="btn"><i class="fa-solid fa-file"></i> Resume</a>
-          <a href="https://github.com/RayQCodes" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
-          <a href="https://www.linkedin.com/in/raymondwquan/" target="_blank" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="raymonds resume.pdf" target="_blank" class="btn" onclick="gtag('event','resume_click',{event_category:'portfolio',event_label:'header_resume'});">
+            <i class="fa-solid fa-file"></i> Resume
+          </a>
+          <a href="https://github.com/RayQCodes" target="_blank" class="btn" onclick="gtag('event','github_click',{event_category:'portfolio',event_label:'header_github'});">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/raymondwquan/" target="_blank" class="btn" onclick="gtag('event','linkedin_click',{event_category:'portfolio',event_label:'header_linkedin'});">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
         </div>
       </div>
     </div>
@@ -30,7 +47,7 @@
   <section class="about section">
     <div class="container">
       <h2>About Me</h2>
-      <p>I am a Cybersecurity Engineering student at George Mason University with  skills in   full-stack development. I’ve worked on projects involving REST APIs, database-driven applications, and automated testing tools. My goal is to join a Software Engineering internship program and contribute to impactful, production-ready applications.</p>
+      <p>I am a Cybersecurity Engineering student at George Mason University with skills in full-stack development. I’ve worked on projects involving REST APIs, database-driven applications, and automated testing tools. My goal is to join a Software Engineering internship program and contribute to impactful, production-ready applications.</p>
     </div>
   </section>
 
@@ -51,19 +68,11 @@
         <li>OOP</li>
         <li>Docker</li>
         <li>Vmware</li>
-
       </ul>
     </div>
   </section>
 
-
-
-
-
-
-
-
-    <!-- ===== Currently Learning ===== -->
+  <!-- ===== Currently Learning ===== -->
   <section class="learning section">
     <div class="container">
       <h2>Currently Learning</h2>
@@ -72,7 +81,10 @@
         <li>MongoDB</li>
         <li>PostgreSQL</li>
         <li>Django</li>
-      </ul
+        <li>Java</li>
+        <li>Spring Boot</li>
+        <li>AWS Cloud Practioner</li>
+      </ul>
     </div>
   </section>
 
@@ -83,18 +95,18 @@
 
       <div class="exp-item">
         <h3>Software Developer Volunteer</h3>
-        <p class="exp-company">June 2025 – Present</p>
+        <p class="exp-company">June 2025 – September 2025</p>
         <ul>
           <li>Assisted in doing unit testing to test team backend and took inspiration from original weather app testing application.</li>
-          <li>Worked with a small teams to help design cybersecurity hackathon plans specifically worked on blue team strategies to win a CTF. </li>
+          <li>Worked with a small teams to help design cybersecurity hackathon plans specifically worked on blue team strategies to win a CTF.</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <h3>Hackathon Participant</h3>
-        <p class="exp-company">Georgetown University - H2 AI Hackathon | March 14 2025 – March  16 2025</p>
+        <p class="exp-company">Georgetown University - H2 AI Hackathon | March 14 2025 – March 16 2025</p>
         <ul>
-          <li>Designed strategies and contributed technical solutions during a   hackathon.</li>
+          <li>Designed strategies and contributed technical solutions during a hackathon.</li>
           <li>Collaborated with peers to create projects aligned with real-world hospital problems. Worked with a small team to create a pdf uploading software that autocorrected errors in hospital forms and I worked on html, and css while my teammates worked on the backend logic and javascript.</li>
         </ul>
       </div>
@@ -108,9 +120,26 @@
 
       <div class="project-card">
         <div class="project-info">
-          <h3>EduSyncAI 📚🧠📅</h3>
+          <h3>Invisible CAPTCHA Web App (Senior Design)</h3>
+          <p>
+            A full-stack web application built with Firebase to collect and analyze user behavioral data for bot detection.
+            Uses Firebase Authentication and Firestore for secure data storage, with Cloud Functions enforcing server-side validation and access control.
+          </p>
+          <a href="https://github.com/CapstoneBlueteam/Website-Production" target="_blank" class="btn"
+             onclick="gtag('event','project_github_click',{event_category:'portfolio',event_label:'InvisibleCAPTCHA'});">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-info">
+          <h3>EduSyncAI 📅</h3>
           <p>In Progress</p>
-          <a href="https://github.com/RayQCodes/EduSyncAI" target="_blank" class="btn"><i class="fab fa-github"></i> View on GitHub</a>
+          <a href="https://github.com/RayQCodes/EduSyncAI" target="_blank" class="btn"
+             onclick="gtag('event','project_github_click',{event_category:'portfolio',event_label:'EduSyncAI'});">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
         </div>
       </div>
 
@@ -118,9 +147,13 @@
         <div class="project-info">
           <h3>AmpAlert⚡</h3>
           <p>A Flask REST API that returns mock battery telemetry data, date information. Useful for learning and testing API integrations.</p>
-          <a href="https://github.com/RayQCodes/BatteryApp" target="_blank" class="btn"><i class="fab fa-github"></i> View on GitHub</a>
+          <a href="https://github.com/RayQCodes/BatteryApp" target="_blank" class="btn"
+             onclick="gtag('event','project_github_click',{event_category:'portfolio',event_label:'AmpAlert'});">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -128,10 +161,10 @@
   <section class="contact section" id="Contact">
     <div class="container">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:rquan3@gmu.edu">rquan3@gmu.edu</a></p>
+      <p>Email: <a href="mailto:rquan3@gmu.edu" onclick="gtag('event','email_click',{event_category:'portfolio',event_label:'contact_email'});">rquan3@gmu.edu</a></p>
       <div class="contact-links">
-        <a href="https://github.com/RayQCodes" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/raymondwquan/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/RayQCodes" target="_blank" onclick="gtag('event','github_click',{event_category:'portfolio',event_label:'footer_github'});"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/raymondwquan/" target="_blank" onclick="gtag('event','linkedin_click',{event_category:'portfolio',event_label:'footer_linkedin'});"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
   </section>
