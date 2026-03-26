@@ -1,172 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWWQRPBPB0"></script>
+  <meta charset="UTF-8">
+  <title>Raymond Quan Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWWQRPBB0"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
-    // Optional (recommended): ensures your own visits are counted even if consent mode isn’t used
-    gtag('config', 'G-TWWQRPBPB0', { 'send_page_view': true });
+    gtag('config', 'G-TWWQRPBB0');
   </script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Raymond Quan - Portfolio</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: white;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #38bdf8;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+
+    .section {
+      padding: 20px 0;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .skills-list li {
+      background: #1e293b;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .project-card {
+      background: #1e293b;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #38bdf8;
+      color: black;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .btn:hover {
+      background: #0ea5e9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #020617;
+    }
+  </style>
 </head>
+
 <body>
-  <!-- ===== HEADER ===== -->
-  <header class="header">
-    <div class="container header-container">
-      <img src="real image.jpg" alt="Profile Picture" class="profile-img"/>
-      <div class="header-text">
-        <h1>Raymond Quan</h1>
-        <h2>Software Engineer & Software Developer</h2>
-        <p>Passionate about software development, creating REST APIs, and building reliable applications. Actively seeking software engineering internship opportunities.</p>
-        <div class="header-buttons">
-          <a href="resume.pdf" target="_blank" class="btn" onclick="gtag('event','resume_click',{event_category:'portfolio',event_label:'header_resume'});">
-            <i class="fa-solid fa-file"></i> Resume
-          </a>
-          <a href="https://github.com/RayQCodes" target="_blank" class="btn" onclick="gtag('event','github_click',{event_category:'portfolio',event_label:'header_github'});">
-            <i class="fab fa-github"></i> GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/raymondwquan/" target="_blank" class="btn" onclick="gtag('event','linkedin_click',{event_category:'portfolio',event_label:'header_linkedin'});">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-        </div>
-      </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <h1>Raymond Quan</h1>
+      <p>Cybersecurity Engineering Student | Backend Developer</p>
+
+      <a href="resume.pdf" class="btn">Download Resume</a>
     </div>
   </header>
 
-  <!-- ===== ABOUT ===== -->
-  <section class="about section">
+  <!-- ABOUT -->
+  <section class="section">
     <div class="container">
       <h2>About Me</h2>
-      <p>I am a Cybersecurity Engineering student at George Mason University with skills in full-stack development. I’ve worked on projects involving REST APIs, database-driven applications, and automated testing tools. My goal is to join a Software Engineering internship program and contribute to impactful, production-ready applications.</p>
+      <p>
+        I am a Cybersecurity Engineering student at George Mason University with a focus on backend development.
+        I enjoy building secure and scalable systems using Java and Spring Boot, and I am currently developing
+        real-world projects involving APIs, databases, and cloud deployment.
+      </p>
     </div>
   </section>
 
-  <!-- ===== SKILLS ===== -->
-  <section class="skills section">
+  <!-- SKILLS -->
+  <section class="section">
     <div class="container">
       <h2>Skills</h2>
       <ul class="skills-list">
-        <li>Python</li>
-        <li>JavaScript</li>
-        <li>HTML/CSS</li>
-        <li>Flask</li>
-        <li>SQL/SQLite</li>
-        <li>Figma</li>
-        <li>Git/GitHub</li>
+        <li>Java</li>
+        <li>Spring Boot</li>
+        <li>Spring Data JPA</li>
+        <li>Hibernate</li>
+        <li>MySQL</li>
         <li>REST APIs</li>
-        <li>MongoDB</li>
-        <li>OOP</li>
-        <li>Docker</li>
-        <li>Vmware</li>
+        <li>Postman</li>
+        <li>Git/GitHub</li>
+        <li>AWS EC2</li>
+        <li>AWS Fundamentals</li>
+        <li>HTML/CSS/JS </li>
+        <li>Backend Development</li>
       </ul>
     </div>
   </section>
 
-  <!-- ===== Currently Learning ===== -->
-  <section class="learning section">
+  <!-- CURRENTLY LEARNING -->
+  <section class="section">
     <div class="container">
       <h2>Currently Learning</h2>
       <ul class="skills-list">
-        <li>React</li>
-        <li>MongoDB</li>
-        <li>PostgreSQL</li>
-        <li>Django</li>
-        <li>Java</li>
-        <li>Spring Boot</li>
-        <li>AWS Cloud Practioner</li>
+        <li>Advanced Spring Boot</li>
+        <li>Backend System Design</li>
+        <li>AWS Cloud Practitioner</li>
+        <li>Database Design</li>
+        <li>Software Debugging</li>
+        <li>Production Deployment</li>
       </ul>
     </div>
   </section>
 
-  <!-- ===== EXPERIENCE ===== -->
-  <section class="experience section">
-    <div class="container">
-      <h2>Experience</h2>
-
-      <div class="exp-item">
-        <h3>Software Developer Volunteer</h3>
-        <p class="exp-company">June 2025 – September 2025</p>
-        <ul>
-          <li>Assisted in doing unit testing to test team backend and took inspiration from original weather app testing application.</li>
-          <li>Worked with a small teams to help design cybersecurity hackathon plans specifically worked on blue team strategies to win a CTF.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <h3>Hackathon Participant</h3>
-        <p class="exp-company">Georgetown University - H2 AI Hackathon | March 14 2025 – March 16 2025</p>
-        <ul>
-          <li>Designed strategies and contributed technical solutions during a hackathon.</li>
-          <li>Collaborated with peers to create projects aligned with real-world hospital problems. Worked with a small team to create a pdf uploading software that autocorrected errors in hospital forms and I worked on html, and css while my teammates worked on the backend logic and javascript.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PROJECTS ===== -->
-  <section class="projects section">
+  <!-- PROJECTS -->
+  <section class="section">
     <div class="container">
       <h2>Projects</h2>
 
       <div class="project-card">
-        <div class="project-info">
-          <h3>Invisible CAPTCHA Web App (Senior Design)</h3>
-          <p>
-            A full-stack web application built with Firebase to collect and analyze user behavioral data for bot detection.
-            Uses Firebase Authentication and Firestore for secure data storage, with Cloud Functions enforcing server-side validation and access control.
-          </p>
-          <a href="https://github.com/CapstoneBlueteam/Website-Production" target="_blank" class="btn"
-             onclick="gtag('event','project_github_click',{event_category:'portfolio',event_label:'InvisibleCAPTCHA'});">
-            <i class="fab fa-github"></i> View on GitHub
-          </a>
-        </div>
+        <h3>Coupon Management API</h3>
+        <p>
+          Built REST APIs using Java and Spring Boot for coupon creation, updates, and redemption.
+          Integrated Spring Data JPA (Hibernate) with MySQL for database operations and tested endpoints using Postman.
+        </p>
+        <a href="#" class="btn">
+          <i class="fa-solid fa-code"></i> Backend Project
+        </a>
+        <a href="https://github.com/RayQCodes/CouponAPI" target="_blank" class="btn">
+          <i class="fab fa-github"></i> GitHub
+        </a>
       </div>
 
       <div class="project-card">
-        <div class="project-info">
-          <h3>EduSyncAI 📅</h3>
-          <p>In Progress</p>
-          <a href="https://github.com/RayQCodes/EduSyncAI" target="_blank" class="btn"
-             onclick="gtag('event','project_github_click',{event_category:'portfolio',event_label:'EduSyncAI'});">
-            <i class="fab fa-github"></i> View on GitHub
-          </a>
-        </div>
+        <h3>Invisible CAPTCHA System</h3>
+        <p>
+          Worked on a team project focused on bot detection and secure deployment.
+          Used AWS EC2 and SSH with PEM keys to manage deployment and researched backend security solutions.
+        </p>
       </div>
 
       <div class="project-card">
-        <div class="project-info">
-          <h3>AmpAlert⚡</h3>
-          <p>A Flask REST API that returns mock battery telemetry data, date information. Useful for learning and testing API integrations.</p>
-          <a href="https://github.com/RayQCodes/BatteryApp" target="_blank" class="btn"
-             onclick="gtag('event','project_github_click',{event_category:'portfolio',event_label:'AmpAlert'});">
-            <i class="fab fa-github"></i> View on GitHub
-          </a>
-        </div>
+        <h3>Software Engineering Virtual Experience</h3>
+        <p>
+          Completed hands-on simulations focused on backend logic, debugging, and system design.
+          Strengthened problem-solving and real-world engineering skills.
+        </p>
+        <a href="#" class="btn">
+          <i class="fa-solid fa-laptop-code"></i> Experience
+        </a>
       </div>
 
     </div>
   </section>
 
-  <!-- ===== CONTACT ===== -->
-  <section class="contact section" id="Contact">
+  <!-- CONTACT -->
+  <section class="section">
     <div class="container">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:rquan3@gmu.edu" onclick="gtag('event','email_click',{event_category:'portfolio',event_label:'contact_email'});">rquan3@gmu.edu</a></p>
-      <div class="contact-links">
-        <a href="https://github.com/RayQCodes" target="_blank" onclick="gtag('event','github_click',{event_category:'portfolio',event_label:'footer_github'});"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/raymondwquan/" target="_blank" onclick="gtag('event','linkedin_click',{event_category:'portfolio',event_label:'footer_linkedin'});"><i class="fab fa-linkedin"></i></a>
-      </div>
+      <p>Email: <a href="mailto:rquan3@gmu.edu">rquan3@gmu.edu</a></p>
+      <p>
+        <a href="https://github.com/RayQCodes" target="_blank">GitHub</a> |
+        <a href="https://linkedin.com/in/raymondwquan" target="_blank">LinkedIn</a>
+      </p>
     </div>
   </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Raymond Quan</p>
+  </footer>
+
 </body>
 </html>
