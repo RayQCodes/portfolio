@@ -26,6 +26,8 @@ export default function About() {
             <div className="info-pill">Backend-focused builder</div>
             <div className="info-pill">Interested in internships and production-style projects</div>
             <div className="info-pill">Learning by shipping polished work</div>
+                       <a href="mailto:rquan3@gmu.edu">Email</a>
+
           </div>
         </motion.div>
       </div>

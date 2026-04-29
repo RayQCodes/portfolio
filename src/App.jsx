@@ -71,8 +71,14 @@ export default function App() {
 
           <motion.a
             href="/resume.pdf"
-            
+            className="resume-btn"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -3, scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
           >
+            Resume
           </motion.a>
         </div>
       </header>
@@ -86,7 +92,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              Backend Engineering + Cloud 
+              Backend Engineering + Cloud
             </motion.div>
 
             <motion.h1
@@ -103,8 +109,6 @@ export default function App() {
               </motion.span>
               <br />
               <span className="hero-dark">Cybersecurity Engineering, Minor: CS B.S.</span>
-              <br />
-      
             </motion.h1>
 
             <motion.p
@@ -112,7 +116,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.16 }}
             >
-              I’m a Cybersecurity Engineering student focused on backend software engineering,
+              I'm a Cybersecurity Engineering student focused on backend software engineering,
               APIs, cloud systems, and practical security.
             </motion.p>
 
@@ -146,7 +150,9 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-    
+              <a href="https://github.com/RayQCodes" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="https://linkedin.com/in/raymondwquan" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="mailto:rquan3@gmu.edu">Email</a>
             </motion.div>
           </div>
 
@@ -203,7 +209,7 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-             Projects
+            Projects
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
@@ -220,7 +226,7 @@ export default function App() {
             viewport={{ once: true }}
             transition={{ delay: 0.12 }}
           >
-            These are some Projects I have been working On.
+            These are some projects I have been working on.
           </motion.p>
 
           <div className="card-grid">
@@ -253,25 +259,31 @@ export default function App() {
           >
             <div>
               <p className="section-label">About Me</p>
-              <h2>I have a passion for backend engineering using java and Spring I like breaking software and testing 
-                it to see how it works.
-              </h2>
-              <p className="section-sub">
+              <h2>
                 My cybersecurity background shapes how I approach software. I care about systems
-                that are functional, polished, and harder to abuse. When Im not building, I love to play pickleball 🎾  and watch anime 📺.
-              </p>
+                that are functional, polished, and harder to abuse. When I'm not building, I love
+                to play pickleball 🎾 and watch anime 📺.
+              </h2>
             </div>
 
             <div className="about-pills">
               <motion.div className="info-pill" whileHover={{ x: 6 }}>
-                Backend and Cloud Focused Engineer
+                Aspiring Backend and Cloud Focused Engineer
               </motion.div>
               <motion.div className="info-pill" whileHover={{ x: 6 }}>
-                Interested in internships and opportunities to improve my skills 😇
+                Interested in Internships And Opportunities To Improve My Skills 😇
               </motion.div>
               <motion.div className="info-pill" whileHover={{ x: 6 }}>
-                Always Passionate to learn something new 😃
+                Always Passionate to Learn Something New 😃
               </motion.div>
+              <motion.a
+                href="/resume.pdf"
+                className="resume-btn"
+                whileHover={{ y: -3, scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Resume
+              </motion.a>
             </div>
           </motion.div>
         </section>
@@ -284,9 +296,9 @@ export default function App() {
             viewport={{ once: true }}
           >
             <p className="section-label">Contact</p>
-            <h2>Let’s build something memorable.</h2>
+            <h2>Let's build something memorable.</h2>
             <p className="section-sub center">
-              I’m currently looking for software engineering internships and would love to connect.
+              I'm currently looking for backend engineering and cloud internships and would love to connect.
             </p>
 
             <div className="hero-buttons center-buttons">

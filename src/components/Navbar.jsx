@@ -11,6 +11,7 @@ export default function Navbar() {
           <a href="#skills">Skills</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
+   
         </nav>
 
         <a href="/resume.pdf" className="bg-black text-white px-4 py-2 rounded-full text-sm">

@@ -62,6 +62,7 @@ export default function Hero() {
             <a href="https://github.com/RayQCodes" target="_blank" rel="noreferrer">GitHub</a>
             <a href="https://linkedin.com/in/raymondwquan" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="mailto:rquan3@gmu.edu">Email</a>
+            
           </motion.div>
         </div>
 
