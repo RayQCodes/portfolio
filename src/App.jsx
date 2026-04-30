@@ -108,7 +108,7 @@ export default function App() {
                 Raymond Quan
               </motion.span>
               <br />
-              <span className="hero-dark">Cybersecurity Engineering, Minor: CS B.S.</span>
+              <span className="hero-dark">Cybersecurity Engineering, B.S.</span>
             </motion.h1>
 
             <motion.p
@@ -117,7 +117,7 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.16 }}
             >
               I'm a Cybersecurity Engineering student focused on backend software engineering,
-              APIs, cloud systems, and practical security.
+              API development, cloud systems, and practical security.
             </motion.p>
 
             <motion.div
@@ -276,14 +276,7 @@ export default function App() {
               <motion.div className="info-pill" whileHover={{ x: 6 }}>
                 Always Passionate to Learn Something New 😃
               </motion.div>
-              <motion.a
-                href="/resume.pdf"
-                className="resume-btn"
-                whileHover={{ y: -3, scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Resume
-              </motion.a>
+              
             </div>
           </motion.div>
         </section>

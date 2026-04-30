@@ -12,13 +12,13 @@ const projects = [
     title: 'Invisible CAPTCHA System',
     tag: 'Security + Team Project',
     description:
-      'Worked on a security-focused team project with a 6 person team exploring bot detection, backend validation, and cloud-based deployment and we also worked using the software engineering life cycle as well as Agile.',
+      'Worked on a security-focused team project with a 6 person team with sprints and a mentor and sponsor creating a system with bot detection, backend validation, and cloud-based deployment which won first place in the Trust, Identity, Authorization & Anti Abuse Track .',
   },
   {
     title: 'Unit Tester Application',
     tag: 'Testing + Automation',
     description:
-      'A lightweight application for sending requests, checking results, and supporting API testing workflows.',
+      'For MAIS Solutions, built a lightweight application for sending requests, checking results in a database, and supporting API testing with that platform.',
   },
 ]
 
