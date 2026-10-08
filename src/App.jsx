@@ -1,329 +1,365 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import Skills from './components/Skills'
+import { useEffect, useState } from "react";
+import { MotionConfig, motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  Cloud,
+  Code2,
+  Database,
+  FileText,
+  Github,
+  Linkedin,
+  Mail,
+  Menu,
+  Moon,
+  Shield,
+  Sun,
+  X,
+} from "lucide-react";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
 
-const projects = [
-  {
-    tag: 'Backend + REST APIs',
-    title: 'Coupon Management API',
-    desc: 'Built REST APIs using Java and Spring Boot for coupon creation, updates, and redemption.',
-  },
-  {
-    tag: 'Security + Team Project',
-    title: 'Invisible CAPTCHA System',
-    desc: 'Worked on a security-focused project exploring bot detection, backend validation, and deployment ideas.',
-  },
-  {
-    tag: 'Testing + Automation',
-    title: 'Unit Tester Application',
-    desc: 'A lightweight application for sending requests, checking results, and supporting API testing.',
-  },
-]
-
-export default function App() {
+const resume = "/resume.pdf?v=20261008";
+const links = [
+  "About",
+  "Skills",
+  "Projects",
+  "Experience",
+  "Certifications",
+  "Contact",
+];
+const certifications = [
+  ["Palantir Foundry Certified Professional", "2026"],
+  ["AWS Solutions Architect – Associate", "July 2026"],
+  ["AWS AI Practitioner", "August 2026"],
+];
+function ResumeLink({
+  className = "secondary-btn",
+  children = "Download Resume",
+}) {
   return (
-    <div className="page">
-      <div className="animated-bg-grid"></div>
-
-      <motion.div
-        className="blob blob-1"
-        animate={{ y: [0, -20, 0], x: [0, 12, 0], scale: [1, 1.08, 1] }}
-        transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="blob blob-2"
-        animate={{ y: [0, 18, 0], x: [0, -14, 0], scale: [1, 1.05, 1] }}
-        transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="blob blob-3"
-        animate={{ y: [0, -16, 0], scale: [1, 1.06, 1] }}
-        transition={{ repeat: Infinity, duration: 11, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="blob blob-4"
-        animate={{ y: [0, 14, 0], x: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 13, ease: 'easeInOut' }}
-      />
-
-      <header className="navbar">
-        <div className="container nav-inner">
-          <motion.div
-            className="brand"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Raymond Quan
-          </motion.div>
-
-          <motion.nav
-            className="nav-links"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </motion.nav>
-
-          <motion.a
-            href="/resume.pdf"
-            className="resume-btn"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -3, scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Resume
-          </motion.a>
-        </div>
-      </header>
-
-      <main>
-        <section className="hero container">
-          <div className="hero-text">
-            <motion.div
-              className="pill"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
+    <a className={className} href={resume} download="Raymond-Quan-Resume.pdf">
+      {children}
+      <FileText size={18} aria-hidden="true" />
+    </a>
+  );
+}
+export default function App() {
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem("raymond-theme");
+      if (saved === "light" || saved === "dark") return saved;
+    } catch {
+      /* Storage may be unavailable. */
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem("raymond-theme", theme);
+    } catch {
+      /* Theme still works without storage. */
+    }
+  }, [theme]);
+  return (
+    <MotionConfig reducedMotion="user">
+      <div className="page">
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <header className="navbar">
+          <div className="container nav-inner">
+            <a className="brand" href="#home" aria-label="Raymond Quan home">
+              <span className="monogram">RQ</span>Raymond Quan
+            </a>
+            <nav
+              id="main-navigation"
+              className={`nav-links ${menuOpen ? "is-open" : ""}`}
+              aria-label="Main navigation"
             >
-              Backend Engineering + Cloud
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.08 }}
-            >
-              <motion.span
-                className="gradient floating-name shimmer-text"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 4.2, ease: 'easeInOut' }}
+              {links.map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link}
+                </a>
+              ))}
+            </nav>
+            <div className="nav-actions">
+              <button
+                className="icon-button theme-toggle"
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
               >
-                Raymond Quan
-              </motion.span>
-              <br />
-              <span className="hero-dark">Cybersecurity Engineering, B.S.</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.16 }}
-            >
-              I'm a Cybersecurity Engineering student focused on backend software engineering,
-              API development, cloud systems, and practical security.
-            </motion.p>
-
-            <motion.div
-              className="hero-buttons"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.24 }}
-            >
-              <motion.a
-                href="#projects"
-                className="primary-btn"
-                whileHover={{ y: -3, scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                {theme === "light" ? <Moon size={21} /> : <Sun size={21} />}
+              </button>
+              <button
+                className="icon-button menu-toggle"
+                aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+                aria-expanded={menuOpen}
+                aria-controls="main-navigation"
+                onClick={() => setMenuOpen(!menuOpen)}
               >
-                View Projects
-              </motion.a>
-              <motion.a
-                href="#contact"
-                className="secondary-btn"
-                whileHover={{ y: -3, scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Contact Me
-              </motion.a>
-            </motion.div>
-
-            <motion.div
-              className="socials"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <a href="https://github.com/RayQCodes" target="_blank" rel="noreferrer">GitHub</a>
-              <a href="https://linkedin.com/in/raymondwquan" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="mailto:rquan3@gmu.edu">Email</a>
-            </motion.div>
-          </div>
-
-          <motion.div
-            className="hero-card"
-            initial={{ opacity: 0, scale: 0.94, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-            whileHover={{ rotate: -0.8, y: -6 }}
-          >
-            <div className="orbit-ring orbit-ring-1"></div>
-            <div className="orbit-ring orbit-ring-2"></div>
-
-            <div className="card-top">
-              <span></span>
-              <span></span>
-              <span></span>
+                {menuOpen ? <X /> : <Menu />}
+              </button>
             </div>
-
-            <div className="image-wrap">
-              <img src="/IMG_1581.JPG" alt="Raymond Quan" className="profile-img" />
-            </div>
-
-            <motion.div
-              className="floating-chip"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-            >
-              Backend + Cloud + Security
-            </motion.div>
-
-            <motion.div
-              className="mini-badge mini-badge-1"
-              animate={{ y: [0, -7, 0] }}
-              transition={{ repeat: Infinity, duration: 5 }}
-            >
-              API Design
-            </motion.div>
-
-            <motion.div
-              className="mini-badge mini-badge-2"
-              animate={{ y: [0, 7, 0] }}
-              transition={{ repeat: Infinity, duration: 5.5 }}
-            >
-              Secure Systems
-            </motion.div>
-          </motion.div>
-        </section>
-
-        <section id="projects" className="section container">
-          <motion.p
-            className="section-label"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Projects
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.06 }}
-          >
-            Technical Projects
-          </motion.h2>
-          <motion.p
-            className="section-sub"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.12 }}
-          >
-            These are some projects I have been working on.
-          </motion.p>
-
-          <div className="card-grid">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                className="glass-card project-card glow-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.08 }}
-                whileHover={{ y: -8, scale: 1.01 }}
-              >
-                <div className="tag">{project.tag}</div>
-                <h3>{project.title}</h3>
-                <p>{project.desc}</p>
-              </motion.div>
-            ))}
           </div>
-        </section>
-
-        <Skills />
-
-        <section id="about" className="section container">
-          <motion.div
-            className="glass-card about-card"
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+        </header>
+        <main id="main">
+          <section
+            id="home"
+            className="hero container"
+            aria-labelledby="hero-title"
           >
+            <div className="hero-watermark" aria-hidden="true">
+              <span>RAYMOND</span>
+              <span>QUAN</span>
+            </div>
+            <motion.div
+              className="hero-text"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65 }}
+            >
+              <p className="eyebrow">Raymond Quan</p>
+              <h1 id="hero-title">
+                Cloud &amp;
+                <br />
+                <span className="accent">Solutions</span>
+                <br />
+                Architect<span className="accent">.</span>
+              </h1>
+              <p className="hero-subtitle">
+                Designing secure, scalable, and impactful cloud solutions with{" "}
+                <strong>AWS</strong>, <strong>DevOps</strong>, and{" "}
+                <strong>Software Engineering.</strong>
+              </p>
+              <div className="hero-buttons">
+                <a href="#projects" className="primary-btn">
+                  View My Work <ArrowUpRight size={19} aria-hidden="true" />
+                </a>
+                <ResumeLink />
+              </div>
+              <div className="socials" aria-label="Social and contact links">
+                <a
+                  href="https://github.com/RayQCodes"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                >
+                  <Github />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/raymondwquan"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin />
+                </a>
+                <a
+                  href="mailto:raymondweihaoquan@gmail.com"
+                  aria-label="Email Raymond"
+                >
+                  <Mail />
+                </a>
+                <ResumeLink className="social-resume">
+                  <span className="sr-only">Download resume</span>
+                </ResumeLink>
+              </div>
+            </motion.div>
+            <motion.div
+              className="hero-visual"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.12 }}
+            >
+              <div className="avatar-glow" aria-hidden="true" />
+              <div className="orbit" aria-hidden="true">
+                <i />
+                <i />
+                <i />
+              </div>
+              <div className="floating-tile tile-cloud" aria-hidden="true">
+                <Cloud />
+              </div>
+              <div className="floating-tile tile-code" aria-hidden="true">
+                <Code2 />
+              </div>
+              <div className="floating-tile tile-data" aria-hidden="true">
+                <Database />
+              </div>
+              <div className="floating-tile tile-shield" aria-hidden="true">
+                <Shield />
+              </div>
+              <img
+                className="hero-avatar"
+                src="/raymond-avatar.png"
+                width="1024"
+                height="1024"
+                alt="3D portrait of Raymond with black glasses, a black jacket, and an unbranded laptop"
+                fetchPriority="high"
+              />
+              <p className="hero-note">
+                <span aria-hidden="true">↖</span>Student
+                <br />
+                Builder
+                <br />
+                Problem Solver
+              </p>
+            </motion.div>
+          </section>
+          <Projects />
+          <section id="about" className="section container about-section">
             <div>
-              <p className="section-label">About Me</p>
+              <p className="eyebrow">01 / About</p>
               <h2>
-                My cybersecurity background shapes how I approach software. I care about systems
-                that are functional, polished, and harder to abuse. When I'm not building, I love
-                to play pickleball 🎾 and watch anime 📺.
+                Secure by design.
+                <br />
+                <span className="accent">Built for impact.</span>
               </h2>
             </div>
-
-            <div className="about-pills">
-              <motion.div className="info-pill" whileHover={{ x: 6 }}>
-                Aspiring Backend and Cloud Focused Engineer
-              </motion.div>
-              <motion.div className="info-pill" whileHover={{ x: 6 }}>
-                Interested in Internships And Opportunities To Improve My Skills 😇
-              </motion.div>
-              <motion.div className="info-pill" whileHover={{ x: 6 }}>
-                Always Passionate to Learn Something New 😃
-              </motion.div>
-              
+            <div className="about-copy">
+              <p>
+                I'm Raymond, a Cybersecurity Engineering student at George Mason
+                University. I bring a security mindset to backend engineering,
+                cloud architecture, and data-driven applications.
+              </p>
+              <p>
+                From integrating behavioral bot detection on AWS to building
+                decision-support workflows in Palantir Foundry, I enjoy turning
+                complex problems into useful systems. Away from the keyboard,
+                you'll find me playing pickleball or watching anime.
+              </p>
+              <div className="education">
+                <h3>George Mason University</h3>
+                <p>
+                  B.S. in Cybersecurity Engineering · Expected December 2026
+                </p>
+                <h3>Georgia Institute of Technology</h3>
+                <p>
+                  Upcoming M.S. in Computer Science (Online) · January 2027–May
+                  2028
+                </p>
+              </div>
             </div>
-          </motion.div>
-        </section>
-
-        <section id="contact" className="section container">
-          <motion.div
-            className="glass-card contact-card glow-card"
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <p className="section-label">Contact</p>
-            <h2>Let's build something memorable.</h2>
-            <p className="section-sub center">
-              I'm currently looking for backend engineering and cloud internships and would love to connect.
-            </p>
-
-            <div className="hero-buttons center-buttons">
-              <motion.a
-                href="mailto:rquan3@gmu.edu"
-                className="primary-btn"
-                whileHover={{ y: -3, scale: 1.03 }}
-              >
-                rquan3@gmu.edu
-              </motion.a>
-              <motion.a
-                href="https://github.com/RayQCodes"
-                target="_blank"
-                rel="noreferrer"
-                className="secondary-btn"
-                whileHover={{ y: -3, scale: 1.03 }}
-              >
-                GitHub
-              </motion.a>
-              <motion.a
-                href="https://linkedin.com/in/raymondwquan"
-                target="_blank"
-                rel="noreferrer"
-                className="secondary-btn"
-                whileHover={{ y: -3, scale: 1.03 }}
-              >
-                LinkedIn
-              </motion.a>
+          </section>
+          <Skills />
+          <section id="experience" className="section container">
+            <p className="eyebrow">03 / Experience</p>
+            <h2>
+              Building with <span className="accent">purpose.</span>
+            </h2>
+            <div className="experience-list">
+              <article className="experience-row">
+                <div>
+                  <p className="experience-date">
+                    June–September 2025 · Remote
+                  </p>
+                  <h3>Volunteer Full-Stack Developer</h3>
+                  <p className="organization">MAIS Solutions LLC</p>
+                </div>
+                <div>
+                  <p>
+                    Developed authentication and application workflows with
+                    Python, Flask, HTML, CSS, JavaScript, and database-backed
+                    services.
+                  </p>
+                  <p>
+                    Migrated authentication and dynamic data to Firebase BaaS
+                    and validated registration, login, verification, and
+                    authenticated-access workflows.
+                  </p>
+                </div>
+              </article>
+              <article className="experience-row">
+                <div>
+                  <p className="experience-date">
+                    October 2, 2026 · Builder Event
+                  </p>
+                  <h3>Navy PPBS Decision Intelligence</h3>
+                  <p className="organization">Accenture Federal Services</p>
+                </div>
+                <div>
+                  <p>
+                    Led product direction and the final presentation for a
+                    four-person team building a Navy decision-support
+                    application. Selected as one of 40 participants from
+                    approximately 200 applicants.
+                  </p>
+                  <p>
+                    Built Foundry pipelines, Ontology objects, and a Workshop +
+                    AIP Logic workflow for financial visualizations and
+                    evidence-grounded decision briefs.
+                  </p>
+                </div>
+              </article>
             </div>
-          </motion.div>
-        </section>
-      </main>
-    </div>
-  )
+          </section>
+          <section id="certifications" className="section container">
+            <p className="eyebrow">04 / Certifications</p>
+            <h2>
+              A foundation to <span className="accent">build on.</span>
+            </h2>
+            <div className="certification-grid">
+              {certifications.map(([title, date]) => (
+                <article className="certification-card" key={title}>
+                  <Shield size={27} aria-hidden="true" />
+                  <h3>{title}</h3>
+                  <p>{date}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+          <section id="contact" className="section container">
+            <div className="contact-card">
+              <p className="eyebrow">05 / Let's connect</p>
+              <h2>
+                Have something
+                <br />
+                <span className="accent">in mind?</span>
+              </h2>
+              <p>
+                Let's talk about cloud, software engineering, and secure
+                systems.
+              </p>
+              <a
+                className="contact-email"
+                href="mailto:raymondweihaoquan@gmail.com"
+              >
+                raymondweihaoquan@gmail.com{" "}
+                <ArrowUpRight size={22} aria-hidden="true" />
+              </a>
+              <div className="hero-buttons">
+                <ResumeLink />
+                <a
+                  href="https://www.linkedin.com/in/raymondwquan"
+                  className="secondary-btn"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Connect on LinkedIn{" "}
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer className="container footer">
+          <a className="brand" href="#home">
+            <span className="monogram">RQ</span>Raymond Quan
+          </a>
+          <p>Cloud. Code. Security.</p>
+          <a href="#home">
+            Back to top <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        </footer>
+      </div>
+    </MotionConfig>
+  );
 }

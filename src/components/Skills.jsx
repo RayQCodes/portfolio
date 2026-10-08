@@ -1,74 +1,46 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-
+import { Cloud, Code2, Database, Workflow } from "lucide-react";
 const skills = [
   {
-    title: 'Languages',
-    desc: 'Java, Python, JavaScript, SQL',
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    description:
+      "AWS EC2, RDS, S3, VPC, IAM, Lambda, CloudWatch · Docker · GitHub Actions · CI/CD · Nginx · Linux",
   },
   {
-    title: 'DB',
-    desc: 'MySQL, SQLite, Firestore',
+    icon: Code2,
+    title: "Software Engineering",
+    description:
+      "Java · Python · C/C++ · JavaScript · SQL · Spring Boot · Flask · REST APIs · HTML/CSS · Unit Testing",
   },
   {
-    title: 'Cloud',
-    desc: 'AWS EC2, Firebase, deployment workflows, GitHub Pages',
+    icon: Database,
+    title: "Data & Persistence",
+    description:
+      "MySQL · PostgreSQL · SQLite · Firebase · Spring Data JPA · Hibernate · Git/GitHub",
   },
   {
-    title: 'Security',
-    desc: 'AWS WAF, IAM, Security Groups, CloudWatch',
+    icon: Workflow,
+    title: "AI & Data Platforms",
+    description:
+      "Palantir Foundry · AIP · AIP Assist · Pipeline Builder/FDE · Ontology · Workshop · Logic",
   },
-   {
-    title: 'Other Tools and Frameworks',
-    desc: 'Docker,Git/Github, Maven, Hibernate, Spring/Spring Boot',
-   }
-  
-]
-
+];
 export default function Skills() {
   return (
     <section id="skills" className="section container">
-      <motion.p
-        className="section-label"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        Skills
-      </motion.p>
-
-      <motion.h2
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        Java Spring Backend Focus
-      </motion.h2>
-
-      <motion.p
-        className="section-sub"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-      </motion.p>
-
-      <div className="card-grid small-grid">
-        {skills.map((skill, index) => (
-          <motion.div
-            key={skill.title}
-            className="glass-card skill-card glow-card"
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: index * 0.07 }}
-            whileHover={{ y: -8 }}
-          >
-            <h3>{skill.title}</h3>
-            <p>{skill.desc}</p>
-          </motion.div>
+      <p className="eyebrow">02 / Toolkit</p>
+      <h2>
+        Across the <span className="accent">stack.</span>
+      </h2>
+      <div className="skills-grid">
+        {skills.map(({ icon: Icon, title, description }) => (
+          <article className="skill-card" key={title}>
+            <Icon size={27} aria-hidden="true" />
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </article>
         ))}
       </div>
     </section>
-  )
+  );
 }
