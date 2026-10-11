@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
+import ArchitectureExplorer from "./components/ArchitectureExplorer";
 
 const resume = "/resume.pdf?v=20261008";
 const links = [
@@ -250,6 +251,7 @@ export default function App() {
             </div>
           </section>
           <Skills />
+          <ArchitectureExplorer />
           <section id="experience" className="section container">
             <p className="eyebrow">03 / Experience</p>
             <h2>
