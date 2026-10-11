@@ -180,10 +180,9 @@ export default function App() {
                 </motion.span>
               </h1>
               <p className="hero-subtitle">
-                Building secure, scalable, and impactful cloud solutions with{" "}
-                <strong>AWS</strong>, <strong>Java</strong>,{" "}
-                <strong>Spring Boot</strong>, and modern software engineering
-                practices.
+                Building secure, scalable cloud applications with{" "}
+                <strong>AWS</strong> and <strong>Spring Boot</strong>, grounded
+                in Java fundamentals and a drive to keep learning.
               </p>
               <div className="hero-buttons">
                 <a
@@ -282,7 +281,9 @@ export default function App() {
               <p>
                 I'm Raymond, a Cybersecurity Engineering student at George Mason
                 University. I bring a security mindset to backend engineering,
-                cloud architecture, and data-driven applications.
+                cloud architecture, and data-driven applications. I’m eager to
+                deepen my AWS and Spring Boot skills, learn from experienced
+                engineers, and apply feedback to real projects.
               </p>
               <p>
                 From integrating behavioral bot detection on AWS to building

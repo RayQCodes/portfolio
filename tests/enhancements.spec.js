@@ -25,7 +25,7 @@ test("approved portrait, navigation targets, resume and project URL are preserve
       .digest("hex"),
   ).toBe("faf4502e23b9ed76d7d4e960082661d5b80257af73dd35fc92d74cef7df53b52");
   await expect(page.locator(".hero-subtitle")).toContainText(
-    "AWS, Java, Spring Boot",
+    "AWS and Spring Boot",
   );
   await expect(page.locator(".career-direction")).toContainText(
     "Career direction",
@@ -152,11 +152,24 @@ test("Spring lifecycle pauses offscreen and can restart cleanly", async ({
   await expect(page.locator(".simulation-status")).toContainText("200 OK");
 });
 
-test("Java concepts highlight real code and the method demo handles valid and unknown options", async ({
+test("Java fundamentals highlight real code and validation handles valid and unknown options", async ({
   page,
 }) => {
   await enterSkills(page);
+  await expect(page.locator(".featured-tech h3")).toHaveText([
+    "AWS",
+    "Spring Boot",
+    "Java",
+  ]);
   await explore(page, "Java").click();
+  await expect(
+    page
+      .getByRole("group", { name: "Java concepts", exact: true })
+      .getByRole("button"),
+  ).toHaveCount(4);
+  await expect(
+    page.getByRole("button", { name: "Method invocation", exact: true }),
+  ).toHaveCount(0);
   await expect(
     featured(page).getByLabel("Complete Java validation example", {
       exact: true,
