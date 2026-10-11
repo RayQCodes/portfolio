@@ -200,8 +200,8 @@ export default function App() {
               </div>
               <img
                 className="hero-avatar"
-                src="/raymond-avatar.png"
-                width="1024"
+                src="/raymond-avatar.png?v=20261011"
+                width="1536"
                 height="1024"
                 alt="3D portrait of Raymond with black glasses, a black jacket, and an unbranded laptop"
                 fetchPriority="high"
