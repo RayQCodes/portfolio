@@ -25,21 +25,20 @@ const featured = [
     icon: Cloud,
   },
   {
-    id: "java",
-    name: "Java",
-    logo: "java",
-    caption: "Logic with structure",
-    summary:
-      "Interfaces, encapsulation, collections, and dependable application logic.",
-    icon: Code2,
-  },
-  {
     id: "spring",
     name: "Spring Boot",
     logo: "spring",
     caption: "From request to response",
     summary: "Controllers, services, repositories, and SQL-backed REST APIs.",
     icon: Layers,
+  },
+  {
+    id: "java",
+    name: "Java",
+    logo: "java",
+    caption: "Backend fundamentals",
+    summary: "Classes, interfaces, encapsulation, collections, and exceptions.",
+    icon: Code2,
   },
 ];
 const awsServices = [
@@ -131,11 +130,6 @@ const javaTopics = [
     name: "Exceptions",
     lines: [15, 16, 24, 26, 27],
     note: "An unknown option raises IllegalArgumentException. The caller catches it and exposes a useful explanation instead of silently accepting invalid input.",
-  },
-  {
-    name: "Method invocation",
-    lines: [14, 18, 22, 23, 25],
-    note: "policy.check invokes the implementation through its interface. A known option returns whether it matches the correct answer.",
   },
 ];
 const layers = [
@@ -288,11 +282,11 @@ function JavaExperience() {
         behavior: reduced ? "auto" : "smooth",
       });
   }
-  function invoke(answer) {
+  function validateExample(answer) {
     const options = Object.freeze(["Amazon S3", "AWS IAM"]);
     try {
       if (!options.includes(answer)) throw new Error("Unknown option");
-      choose(4);
+      choose(2);
       setResult(String(answer === "AWS IAM"));
     } catch (error) {
       choose(3);
@@ -331,7 +325,7 @@ function JavaExperience() {
         </pre>
       </div>
       <div className="technology-note">
-        <p className="eyebrow">Java / backend logic</p>
+        <p className="eyebrow">Java / backend fundamentals</p>
         <div
           className="concept-options"
           role="group"
@@ -352,7 +346,7 @@ function JavaExperience() {
           <button
             type="button"
             className="secondary-btn"
-            onClick={() => invoke("AWS IAM")}
+            onClick={() => validateExample("AWS IAM")}
           >
             <Play size={14} aria-hidden="true" />
             Run valid answer
@@ -360,7 +354,7 @@ function JavaExperience() {
           <button
             type="button"
             className="secondary-btn"
-            onClick={() => invoke("Unknown service")}
+            onClick={() => validateExample("Unknown service")}
           >
             Try unknown option
           </button>
@@ -374,7 +368,7 @@ function JavaExperience() {
           transition={{ duration: reduced ? 0 : 0.2 }}
         >
           {result === null
-            ? "Select a concept or invoke check()."
+            ? "Explore a Java fundamental or try an example."
             : `Console → ${result}`}
         </motion.output>
         <p className="mini-disclaimer">
@@ -587,7 +581,7 @@ export default function FeaturedTechnologies() {
       >
         {featured.map((item, i) => (
           <motion.article
-            className={`featured-tech premium-surface ${active === item.id ? "tech-active" : ""}`}
+            className={`featured-tech premium-surface ${item.id === "java" ? "tech-foundation" : "tech-core-focus"} ${active === item.id ? "tech-active" : ""}`}
             key={item.id}
             {...surfaceEvents}
             initial={reduced ? false : { opacity: 0, y: 24 }}
@@ -603,7 +597,10 @@ export default function FeaturedTechnologies() {
                 alt={`${item.name} logo`}
                 loading="lazy"
               />
-              <span>0{i + 1} / Core technology</span>
+              <span>
+                0{i + 1} /{" "}
+                {item.id === "java" ? "Backend fundamentals" : "Core focus"}
+              </span>
             </div>
             <h3>{item.name}</h3>
             <p className="tech-caption">{item.caption}</p>
@@ -620,9 +617,9 @@ export default function FeaturedTechnologies() {
                 </>
               ) : item.id === "java" ? (
                 <>
-                  <code>implements</code>
+                  <code>class</code>
+                  <code>interface</code>
                   <code>List&lt;String&gt;</code>
-                  <code>check()</code>
                 </>
               ) : (
                 <>

@@ -192,6 +192,11 @@ export default function Skills() {
           Across the <span className="accent">stack.</span>
         </h2>
       </Reveal>
+      <p className="skills-focus">
+        My focus is AWS cloud infrastructure and Spring Boot backend
+        applications. I learn by building, testing, and iterating on real
+        projects.
+      </p>
       <FeaturedTechnologies />
       <div className="skills-ecosystem-heading">
         <h3>The connected toolkit.</h3>
