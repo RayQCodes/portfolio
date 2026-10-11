@@ -148,10 +148,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65 }}
             >
-              <p className="eyebrow">
-                Raymond Quan{" "}
-                <span className="career-direction">· Career direction</span>
-              </p>
+              <p className="eyebrow">Raymond Quan</p>
               <h1 id="hero-title">
                 <motion.span
                   className="headline-line"
@@ -368,7 +365,6 @@ export default function App() {
           <a className="brand" href="#home">
             <span className="monogram">RQ</span>Raymond Quan
           </a>
-          <p>Cloud. Code. Security.</p>
           <a href="#home">
             Back to top <ArrowUpRight size={16} aria-hidden="true" />
           </a>

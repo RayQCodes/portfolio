@@ -27,8 +27,8 @@ test("approved portrait, navigation targets, resume and project URL are preserve
   await expect(page.locator(".hero-subtitle")).toContainText(
     "AWS and Spring Boot",
   );
-  await expect(page.locator(".career-direction")).toContainText(
-    "Career direction",
+  await expect(page.locator(".hero-text > .eyebrow")).toHaveText(
+    "Raymond Quan",
   );
   const broken = await page
     .locator('a[href^="#"]')

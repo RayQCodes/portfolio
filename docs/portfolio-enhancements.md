@@ -4,7 +4,7 @@ This feature starts from publishing branch commit `a2862a6`, including the appro
 
 ## Changed components
 
-- `App.jsx`: hero subtitle prioritizing AWS and Spring Boot, supported by Java fundamentals and continued learning; career-direction qualifier; staggered headline; active navigation; integration of the enhanced timeline.
+- `App.jsx`: hero subtitle prioritizing AWS and Spring Boot, supported by Java fundamentals and continued learning; staggered headline; active navigation; integration of the enhanced timeline.
 - `InteractiveMotion.jsx`: masked individual name-letter entrances, blur-to-sharp spring reveals, a brief shimmer, subtle letter hover, bounded pointer parallax, scroll depth/progress, section reveals, and a reactive reduced-motion preference subscription with cleanup.
 - `FeaturedTechnologies.jsx`: recognizable locally served AWS/Java/Spring logos and three featured cards, led by AWS and Spring Boot with Java presented as backend fundamentals. AWS badges explain six toolkit services and link to the existing explorer. Four Java fundamentals (classes/interfaces, encapsulation, collections, and exceptions) highlight a complete validation example; local validation shows valid-answer and exception branches. Method invocation is not a featured topic. Spring Boot demonstrates the request and response lifecycle across client, controller, service, repository, and MySQL, with inspectable layers, reset, and example JSON responses.
 - `Skills.jsx`: retains the existing categories and technologies (excluding the specifically prohibited service in the featured cloud content), adds source-backed DevOps/security groupings, selectable skill connections, and category filters. Terraform is omitted at Raymond's request.

@@ -42,11 +42,6 @@ body,
     color 0.25s,
     box-shadow 0.25s;
 }
-.career-direction {
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  opacity: 0.75;
-}
 .headline-line {
   display: inline-block;
 }
@@ -1191,9 +1186,6 @@ select:focus-visible,
   }
   .signature-name .signature-letter {
     pointer-events: none;
-  }
-  .career-direction {
-    font-size: 8px;
   }
 }
 @media (max-width: 480px) {
