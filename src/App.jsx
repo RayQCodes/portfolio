@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MotionConfig, motion } from "framer-motion";
 import {
   ArrowUpRight,
+  ArrowUpLeft,
   Cloud,
   Code2,
   Database,
@@ -18,6 +19,14 @@ import {
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import ArchitectureExplorer from "./components/ArchitectureExplorer";
+import {
+  HeroSignature,
+  ScrollProgress,
+  useHeroMotion,
+  surfaceEvents,
+  Reveal,
+} from "./components/InteractiveMotion";
+import ExperienceTimeline from "./components/ExperienceTimeline";
 
 const resume = "/resume.pdf?v=20261008";
 const links = [
@@ -57,6 +66,9 @@ export default function App() {
       : "light";
   });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const trackActive = useCallback((id) => setActiveSection(id), []);
+  const hero = useHeroMotion();
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
@@ -68,6 +80,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="page">
+        <ScrollProgress onActive={trackActive} />
         <a className="skip-link" href="#main">
           Skip to content
         </a>
@@ -85,6 +98,11 @@ export default function App() {
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
+                  aria-current={
+                    activeSection === link.toLowerCase()
+                      ? "location"
+                      : undefined
+                  }
                   onClick={() => setMenuOpen(false)}
                 >
                   {link}
@@ -113,35 +131,66 @@ export default function App() {
         </header>
         <main id="main">
           <section
+            ref={hero.ref}
+            {...hero.events}
             id="home"
             className="hero container"
             aria-labelledby="hero-title"
           >
-            <div className="hero-watermark" aria-hidden="true">
-              <span>RAYMOND</span>
-              <span>QUAN</span>
-            </div>
+            <HeroSignature
+              heroRef={hero.ref}
+              x={hero.x}
+              reduced={hero.reduced}
+            />
             <motion.div
               className="hero-text"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65 }}
             >
-              <p className="eyebrow">Raymond Quan</p>
+              <p className="eyebrow">
+                Raymond Quan{" "}
+                <span className="career-direction">· Career direction</span>
+              </p>
               <h1 id="hero-title">
-                Cloud &amp;
+                <motion.span
+                  className="headline-line"
+                  initial={hero.reduced ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  Cloud &amp;
+                </motion.span>
                 <br />
-                <span className="accent">Solutions</span>
+                <motion.span
+                  className="accent headline-line"
+                  initial={hero.reduced ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: hero.reduced ? 0 : 0.12 }}
+                >
+                  Solutions
+                </motion.span>
                 <br />
-                Architect<span className="accent">.</span>
+                <motion.span
+                  className="headline-line"
+                  initial={hero.reduced ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: hero.reduced ? 0 : 0.24 }}
+                >
+                  Architect<span className="accent">.</span>
+                </motion.span>
               </h1>
               <p className="hero-subtitle">
-                Designing secure, scalable, and impactful cloud solutions with{" "}
-                <strong>AWS</strong>, <strong>DevOps</strong>, and{" "}
-                <strong>Software Engineering.</strong>
+                Building secure, scalable, and impactful cloud solutions with{" "}
+                <strong>AWS</strong>, <strong>Java</strong>,{" "}
+                <strong>Spring Boot</strong>, and modern software engineering
+                practices.
               </p>
               <div className="hero-buttons">
-                <a href="#projects" className="primary-btn">
+                <a
+                  href="#projects"
+                  className="primary-btn magnetic-cta"
+                  {...surfaceEvents}
+                >
                   View My Work <ArrowUpRight size={19} aria-hidden="true" />
                 </a>
                 <ResumeLink />
@@ -175,7 +224,8 @@ export default function App() {
               </div>
             </motion.div>
             <motion.div
-              className="hero-visual"
+              className={`hero-visual ${hero.visible && !hero.reduced ? "hero-alive" : ""}`}
+              style={hero.reduced ? {} : { x: hero.x, y: hero.y }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.12 }}
@@ -207,7 +257,10 @@ export default function App() {
                 fetchPriority="high"
               />
               <p className="hero-note">
-                <span aria-hidden="true">↖</span>Student
+                <span aria-hidden="true">
+                  <ArrowUpLeft size={28} />
+                </span>
+                Student
                 <br />
                 Builder
                 <br />
@@ -257,57 +310,15 @@ export default function App() {
             <h2>
               Building with <span className="accent">purpose.</span>
             </h2>
-            <div className="experience-list">
-              <article className="experience-row">
-                <div>
-                  <p className="experience-date">
-                    June–September 2025 · Remote
-                  </p>
-                  <h3>Volunteer Full-Stack Developer</h3>
-                  <p className="organization">MAIS Solutions LLC</p>
-                </div>
-                <div>
-                  <p>
-                    Developed authentication and application workflows with
-                    Python, Flask, HTML, CSS, JavaScript, and database-backed
-                    services.
-                  </p>
-                  <p>
-                    Migrated authentication and dynamic data to Firebase BaaS
-                    and validated registration, login, verification, and
-                    authenticated-access workflows.
-                  </p>
-                </div>
-              </article>
-              <article className="experience-row">
-                <div>
-                  <p className="experience-date">
-                    October 2, 2026 · Builder Event
-                  </p>
-                  <h3>Navy PPBS Decision Intelligence</h3>
-                  <p className="organization">Accenture Federal Services</p>
-                </div>
-                <div>
-                  <p>
-                    Led product direction and the final presentation for a
-                    four-person team building a Navy decision-support
-                    application. Selected as one of 40 participants from
-                    approximately 200 applicants.
-                  </p>
-                  <p>
-                    Built Foundry pipelines, Ontology objects, and a Workshop +
-                    AIP Logic workflow for financial visualizations and
-                    evidence-grounded decision briefs.
-                  </p>
-                </div>
-              </article>
-            </div>
+            <ExperienceTimeline />
           </section>
           <section id="certifications" className="section container">
             <p className="eyebrow">04 / Certifications</p>
-            <h2>
-              A foundation to <span className="accent">build on.</span>
-            </h2>
+            <Reveal kind="focus">
+              <h2>
+                A foundation to <span className="accent">build on.</span>
+              </h2>
+            </Reveal>
             <div className="certification-grid">
               {certifications.map(([title, date]) => (
                 <article className="certification-card" key={title}>
@@ -319,7 +330,7 @@ export default function App() {
             </div>
           </section>
           <section id="contact" className="section container">
-            <div className="contact-card">
+            <div className="contact-card premium-surface" {...surfaceEvents}>
               <p className="eyebrow">05 / Let's connect</p>
               <h2>
                 Have something
