@@ -25,6 +25,7 @@ const projects = [
       "93% detection accuracy, sub-50 ms latency, and 1st Place at the GMU Senior Capstone Competition.",
     id: "captcha",
     title: "Invisible CAPTCHA",
+    href: "https://github.com/RayQCodes/FinalCapstone",
     subtitle: "Award-winning cybersecurity capstone",
     description:
       "Behavioral analysis and bot detection with Python, Flask, and AWS. Achieved 93% detection accuracy with sub-50 ms latency; 1st Place in the GMU Senior Capstone Competition.",
@@ -288,7 +289,9 @@ function ProjectCard({ project, index }) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  View backend on GitHub
+                  {project.id === "quiz"
+                    ? "View backend on GitHub"
+                    : "View project on GitHub"}
                   <ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               )}
