@@ -1,8 +1,28 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Database, Shield } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  ChevronDown,
+  Database,
+  Shield,
+} from "lucide-react";
+
+import { surfaceEvents, useMotionPreference } from "./InteractiveMotion";
 
 const projects = [
   {
+    workflow: [
+      "Behavioral signals",
+      "Flask API",
+      "Detection model",
+      "JSON verdict",
+    ],
+    focus:
+      "Connect consistent behavioral-signal payloads to the detection workflow while keeping the response path efficient.",
+    results:
+      "93% detection accuracy, sub-50 ms latency, and 1st Place at the GMU Senior Capstone Competition.",
     id: "captcha",
     title: "Invisible CAPTCHA",
     subtitle: "Award-winning cybersecurity capstone",
@@ -13,17 +33,27 @@ const projects = [
       "Led backend API integration and AWS architecture across a six-engineer team, connecting behavioral signals to the detection workflow with structured JSON APIs and EC2/VPC security controls.",
   },
   {
+    workflow: ["Controller", "Service", "Repository", "MySQL / RDS"],
+    focus:
+      "Keep routing, business logic, DTO mapping, and SQL persistence in separate layers. Validate answers on the server.",
+    results:
+      "Topic-based lessons and questions, three REST endpoints, and private MySQL persistence for the cloud-hosted Java application.",
     id: "quiz",
-    title: "Interactive Quiz Application",
-    subtitle: "Spring Boot · MySQL · REST APIs",
+    title: "Full-Stack Testing Automation System",
+    subtitle: "Quiz Application · Spring Boot · MySQL",
     description:
-      "SQL-backed lessons and quiz questions organized by topic, with server-side answer validation. Built in Java 17 with Spring Boot, MySQL, Spring Data JPA, Hibernate, and Lombok.",
-    technologies: ["Java 17", "Spring Boot", "MySQL", "REST APIs"],
+      "The SQL-backed Quiz Application, with topic-based lessons, quiz questions, and server-side answer validation. Java 17, Spring Boot, Spring Data JPA, Hibernate, and Lombok; cloud deployment with EC2, Nginx, and MySQL on RDS.",
+    technologies: ["Java 17", "Spring Boot", "MySQL / RDS", "REST APIs"],
     details:
       "Controller–service–repository architecture with DTO mapping and constructor-based dependency injection. The backend retrieves lessons and questions by topic and validates submitted answers on the server.",
     href: "https://github.com/RayQCodes/quizapp/tree/backend",
   },
   {
+    workflow: ["Source data", "Pipelines", "Ontology", "Workshop + AIP"],
+    focus:
+      "Transform multi-source Navy PPBS data into usable Ontology objects and ground decision briefs in the underlying evidence.",
+    results:
+      "A four-person team's decision-support application and final presentation at the AFS Builder Event.",
     id: "foundry",
     title: "Palantir Foundry Hackathon",
     subtitle: "Navy PPBS · AFS Builder Event",
@@ -34,6 +64,16 @@ const projects = [
       "Used AIP Assist/FDE to transform budget, obligation, contract, vendor, and program data into pipelines and Ontology objects. Built filtering, financial visualizations, KPI views, and evidence-grounded Program Manager decision briefs.",
   },
   {
+    workflow: [
+      "Agent logs",
+      "Wazuh monitoring",
+      "Log analysis",
+      "Security events",
+    ],
+    focus:
+      "Understand collected system activity, cloud connectivity, and security-event investigation in a hands-on lab.",
+    results:
+      "A lab environment for collecting and analyzing system logs and security events.",
     id: "wazuh",
     title: "Wazuh SIEM Lab",
     subtitle: "Security monitoring · AWS",
@@ -145,6 +185,120 @@ function ProjectPreview({ type }) {
     </div>
   );
 }
+function ProjectCard({ project, index }) {
+  const [open, setOpen] = useState(false);
+  const reduced = useMotionPreference();
+  return (
+    <motion.article
+      id={`project-${project.id}`}
+      className="project-card premium-surface"
+      {...surfaceEvents}
+      layout={reduced ? false : "position"}
+      initial={reduced ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: reduced ? 0 : 0.45,
+        delay: reduced ? 0 : index * 0.06,
+      }}
+    >
+      <div className="project-heading">
+        <span className="project-number">0{index + 1}</span>
+        <div>
+          <h3>
+            {project.href ? (
+              <a href={project.href} target="_blank" rel="noreferrer">
+                {project.title}
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            ) : (
+              project.title
+            )}
+          </h3>
+          <p>{project.subtitle}</p>
+        </div>
+      </div>
+      <ProjectPreview type={project.id} />
+      <p className="preview-caption">Concept illustration</p>
+      <p className="project-description">{project.description}</p>
+      <ul
+        className="technology-tags"
+        aria-label={`${project.title} technologies`}
+      >
+        {project.technologies.map((tech) => (
+          <li key={tech}>{tech}</li>
+        ))}
+      </ul>
+      <div className="project-details-control">
+        <button
+          type="button"
+          className="project-explore"
+          aria-expanded={open}
+          aria-controls={`project-details-${project.id}`}
+          onClick={() => setOpen(!open)}
+        >
+          Explore project
+          <ChevronDown size={14} aria-hidden="true" />
+        </button>
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              id={`project-details-${project.id}`}
+              className="project-expanded"
+              initial={reduced ? false : { height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: reduced ? 0 : 0.25 }}
+            >
+              <h4>My contributions</h4>
+              <p>{project.details}</p>
+              <h4>Architecture / workflow</h4>
+              <div className="project-workflow">
+                {project.workflow.map((step, i) => (
+                  <span key={step}>
+                    {i > 0 && <ArrowRight size={12} aria-hidden="true" />}
+                    {step}
+                  </span>
+                ))}
+              </div>
+              <p className="mini-disclaimer">
+                Conceptual workflow, not a product screenshot.
+              </p>
+              <h4>Engineering focus</h4>
+              <p>{project.focus}</p>
+              <h4>Results</h4>
+              <p>{project.results}</p>
+              {project.id === "quiz" && (
+                <ul className="api-endpoints">
+                  <li>
+                    <code>GET /api/lesson/{"{topic}"}</code>
+                  </li>
+                  <li>
+                    <code>GET /api/questions/{"{topic}"}</code>
+                  </li>
+                  <li>
+                    <code>POST /api/answer</code>
+                  </li>
+                </ul>
+              )}
+              {project.href && (
+                <a
+                  className="text-link"
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View backend on GitHub
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.article>
+  );
+}
 export default function Projects() {
   return (
     <section
@@ -160,72 +314,7 @@ export default function Projects() {
       </div>
       <div className="project-grid">
         {projects.map((project, index) => (
-          <motion.article
-            className="project-card"
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: index * 0.06 }}
-          >
-            <div className="project-heading">
-              <span className="project-number">0{index + 1}</span>
-              <div>
-                <h3>
-                  {project.href ? (
-                    <a href={project.href} target="_blank" rel="noreferrer">
-                      {project.title}
-                      <ArrowUpRight size={17} aria-hidden="true" />
-                    </a>
-                  ) : (
-                    project.title
-                  )}
-                </h3>
-                <p>{project.subtitle}</p>
-              </div>
-            </div>
-            <ProjectPreview type={project.id} />
-            <p className="preview-caption">Concept illustration</p>
-            <p className="project-description">{project.description}</p>
-            <ul
-              className="technology-tags"
-              aria-label={`${project.title} technologies`}
-            >
-              {project.technologies.map((tech) => (
-                <li key={tech}>{tech}</li>
-              ))}
-            </ul>
-            <details>
-              <summary>
-                Explore project <ArrowUpRight size={14} aria-hidden="true" />
-              </summary>
-              <p>{project.details}</p>
-              {project.id === "quiz" && (
-                <>
-                  <ul className="api-endpoints">
-                    <li>
-                      <code>GET /api/lesson/{"{topic}"}</code>
-                    </li>
-                    <li>
-                      <code>GET /api/questions/{"{topic}"}</code>
-                    </li>
-                    <li>
-                      <code>POST /api/answer</code>
-                    </li>
-                  </ul>
-                  <a
-                    className="text-link"
-                    href={project.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    View backend on GitHub{" "}
-                    <ArrowUpRight size={14} aria-hidden="true" />
-                  </a>
-                </>
-              )}
-            </details>
-          </motion.article>
+          <ProjectCard key={project.id} project={project} index={index} />
         ))}
       </div>
     </section>

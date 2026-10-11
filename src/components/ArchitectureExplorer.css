@@ -1031,3 +1031,16 @@
     animation: none;
   }
 }
+
+/* Refine the existing explorer without altering its diagram or interactions. */
+.aws-node.is-selected .aws-card,
+.aws-node.is-selected .aws-sg-badge {
+  filter: drop-shadow(0 3px 8px #9460f033);
+}
+.aws-route.is-highlighted .aws-connection {
+  filter: drop-shadow(0 0 4px #9460f05c);
+}
+.aws-tooltip {
+  box-shadow: 0 12px 30px #38224d24;
+  border-color: var(--aws-edge);
+}

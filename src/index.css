@@ -206,11 +206,11 @@ p {
   pointer-events: none;
   user-select: none;
 }
-.hero-watermark span:first-child {
+.hero-watermark > span:first-child {
   display: block;
   font-size: clamp(90px, 18.5vw, 280px);
 }
-.hero-watermark span:last-child {
+.hero-watermark > span:last-child {
   display: block;
   text-align: right;
   font-size: clamp(75px, 11vw, 165px);
@@ -1025,10 +1025,10 @@ p {
   .hero-watermark {
     inset: 0 -5px auto;
   }
-  .hero-watermark span:first-child {
+  .hero-watermark > span:first-child {
     font-size: 17.8vw;
   }
-  .hero-watermark span:last-child {
+  .hero-watermark > span:last-child {
     margin-top: 24px;
     font-size: 13vw;
   }
@@ -1139,10 +1139,10 @@ p {
   .hero-watermark {
     inset: 4px -2px auto;
   }
-  .hero-watermark span:first-child {
+  .hero-watermark > span:first-child {
     font-size: 17.5vw;
   }
-  .hero-watermark span:last-child {
+  .hero-watermark > span:last-child {
     font-size: 15vw;
     margin-top: 8px;
   }

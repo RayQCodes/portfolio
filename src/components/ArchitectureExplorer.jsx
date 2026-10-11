@@ -1,10 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import {
   ArrowDown,
   ArrowLeft,
@@ -27,6 +22,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import "./ArchitectureExplorer.css";
+import { useMotionPreference } from "./InteractiveMotion";
 
 const SERVICES = {
   ec2: {
@@ -254,7 +250,7 @@ export default function ArchitectureExplorer() {
   const dragRef = useRef(null);
   const isVisible = useInView(stageRef, { amount: 0.12 });
   const revealed = useInView(stageRef, { amount: 0.12, once: true });
-  const reduced = useReducedMotion();
+  const reduced = useMotionPreference();
   const [mode, setMode] = useState("overview");
   const [selected, setSelected] = useState(null);
   const [tooltip, setTooltip] = useState(null);
@@ -388,6 +384,7 @@ export default function ArchitectureExplorer() {
       tabIndex: 0,
       "aria-label": `Explore ${SERVICES[key].name}`,
       "aria-pressed": selected === key,
+      "aria-controls": id("component-details"),
       "aria-describedby": tooltip?.key === key ? id("tooltip") : undefined,
       className: `aws-node ${selected === key ? "is-selected" : ""} ${mode === "flow" && flow.services.includes(key) ? "is-flow-active" : ""}`,
       onClick: () => selectService(key),
@@ -1023,7 +1020,7 @@ export default function ArchitectureExplorer() {
                       />
                       <circle
                         r="3.5"
-                        fill="#b99bff"
+                        fill="#d8c5ff"
                         stroke="#fff"
                         strokeWidth="1"
                       />
@@ -1129,6 +1126,7 @@ export default function ArchitectureExplorer() {
           </div>
           <aside
             ref={detailRef}
+            id={id("component-details")}
             className="aws-detail-panel"
             aria-label="Architecture component details"
           >
@@ -1144,7 +1142,10 @@ export default function ArchitectureExplorer() {
                   initial={reduced ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: reduced ? 0 : 0.2 }}
+                  transition={{
+                    duration: reduced ? 0 : 0.25,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                 >
                   <div className="aws-detail-icon">
                     <Icon size={26} aria-hidden="true" />
