@@ -1,0 +1,230 @@
+/* Reference-inspired framing uses the approved portrait and live React controls. */
+.hero-visual.portrait-stage {
+  isolation: isolate;
+  min-height: 440px;
+  justify-content: flex-start;
+  padding: 0 0 20px 4%;
+  margin-top: -20px;
+}
+.portrait-stage .hero-avatar {
+  width: min(520px, 74%);
+  flex-shrink: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 13px 15px #2e174515);
+}
+.portrait-stage .avatar-glow {
+  top: 3%;
+  bottom: auto;
+  left: 3%;
+  width: 90%;
+  height: 90%;
+  aspect-ratio: auto;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at var(--pointer-x, 50%) 45%,
+    #ab80ed21,
+    #b99af209 48%,
+    transparent 72%
+  );
+}
+.portrait-stage .orbit {
+  top: 8%;
+  left: 5%;
+  width: 86%;
+  height: 69%;
+  border-color: #9972d940;
+  pointer-events: none;
+}
+.hero-shortcuts {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.hero-shortcuts .floating-tile {
+  pointer-events: auto;
+  text-decoration: none;
+  color: var(--accent);
+  background: linear-gradient(135deg, #ffffff18, #a577ea08), var(--card);
+  border-color: #a786d63d;
+  transition:
+    scale 0.22s,
+    box-shadow 0.22s,
+    border-color 0.22s;
+}
+.hero-shortcuts .tile-cloud {
+  top: 8%;
+  left: 7%;
+}
+.hero-shortcuts .tile-code {
+  top: 3%;
+  right: 12%;
+}
+.hero-shortcuts .tile-data {
+  top: 45%;
+  left: 0;
+}
+.hero-shortcuts .tile-shield {
+  top: 45%;
+  right: 3%;
+}
+.hero-shortcuts .floating-tile:hover,
+.hero-shortcuts .floating-tile:focus-visible {
+  scale: 1.035;
+  border-color: #a383e0a1;
+  box-shadow: 0 8px 26px #8a54d523;
+}
+.hero-tile-tooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, -3px);
+  opacity: 0;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+.hero-shortcuts .tile-data .hero-tile-tooltip {
+  left: 0;
+  transform: translate(0, -3px);
+}
+.hero-shortcuts .tile-shield .hero-tile-tooltip {
+  left: auto;
+  right: 0;
+  transform: translate(0, -3px);
+}
+.hero-shortcuts .floating-tile:hover .hero-tile-tooltip,
+.hero-shortcuts .floating-tile:focus-visible .hero-tile-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.hero-shortcuts .tile-data:hover .hero-tile-tooltip,
+.hero-shortcuts .tile-data:focus-visible .hero-tile-tooltip,
+.hero-shortcuts .tile-shield:hover .hero-tile-tooltip,
+.hero-shortcuts .tile-shield:focus-visible .hero-tile-tooltip {
+  transform: translate(0, 0);
+}
+.portrait-stage .hero-note {
+  right: 1%;
+  bottom: 20%;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 140px;
+}
+.portrait-stage .hero-note > span {
+  left: -31px;
+  top: -3px;
+}
+[data-theme="dark"] .portrait-stage .avatar-glow {
+  background: radial-gradient(
+    ellipse at var(--pointer-x, 50%) 42%,
+    #a778e521,
+    #8566ad0a 51%,
+    transparent 74%
+  );
+}
+[data-theme="dark"] .hero-shortcuts .floating-tile {
+  background: linear-gradient(140deg, #d0adff06, #d0adff00), #211c2ce0;
+  color: #b18be9;
+  border-color: #a984d72c;
+}
+[data-theme="dark"] .portrait-stage .orbit {
+  border-color: #9a71d22b;
+}
+[data-theme="dark"] .portrait-stage .hero-avatar {
+  filter: drop-shadow(0 16px 22px #08051036);
+}
+@media (max-width: 1150px) {
+  .hero-visual.portrait-stage {
+    min-height: 380px;
+    padding-left: 2%;
+  }
+  .portrait-stage .hero-avatar {
+    width: 76%;
+  }
+  .portrait-stage .hero-note {
+    font-size: 12px;
+    right: 12px;
+    bottom: 22%;
+    max-width: 105px;
+  }
+  .portrait-stage .hero-note > span {
+    left: -25px;
+  }
+  .portrait-stage .hero-note > span svg {
+    width: 23px;
+    height: 23px;
+  }
+}
+@media (max-width: 760px) {
+  .hero-visual.portrait-stage {
+    min-height: 340px;
+    justify-content: center;
+    padding: 0 0 16px;
+    margin-top: 8px;
+  }
+  .portrait-stage .hero-avatar {
+    width: min(340px, 92%);
+  }
+  .portrait-stage .orbit {
+    left: 6%;
+    top: 10%;
+    width: 87%;
+    height: 66%;
+  }
+  .hero-shortcuts .tile-cloud {
+    left: 8%;
+    top: 8%;
+  }
+  .hero-shortcuts .tile-code {
+    right: 8%;
+    top: 5%;
+  }
+  .hero-shortcuts .tile-data {
+    left: 1%;
+    top: 44%;
+  }
+  .hero-shortcuts .tile-shield {
+    right: 1%;
+    top: 40%;
+  }
+  .portrait-stage .hero-note {
+    bottom: 36%;
+    right: 10px;
+    font-size: 10.5px;
+    max-width: 84px;
+  }
+  .portrait-stage .hero-note > span {
+    left: -21px;
+    top: 2px;
+  }
+  .portrait-stage .hero-note > span svg {
+    width: 19px;
+    height: 19px;
+  }
+  .hero-tile-tooltip {
+    font-size: 9px;
+    padding: 6px 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-shortcuts .floating-tile,
+  .hero-tile-tooltip {
+    transition: none;
+  }
+  .hero-shortcuts .floating-tile:hover,
+  .hero-shortcuts .floating-tile:focus-visible {
+    scale: 1;
+  }
+}

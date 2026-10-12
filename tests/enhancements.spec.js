@@ -324,3 +324,35 @@ test("mobile widths, theme persistence, navigation and reduced-motion interactio
   ).toHaveAttribute("aria-expanded", "false");
   await expect(page).toHaveURL(/#skills$/);
 });
+
+test("hero technology shortcuts support keyboard exploration without replacing the portrait", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const shortcuts = page.getByRole("group", {
+    name: "Hero technology shortcuts",
+    exact: true,
+  });
+  const destinations = [
+    ["Explore AWS infrastructure", "#architecture"],
+    ["Explore Spring Boot and backend skills", "#skills"],
+    ["Explore the SQL-backed application", "#project-quiz"],
+    ["Explore cloud security boundaries", "#architecture"],
+  ];
+  await expect(shortcuts.getByRole("link")).toHaveCount(4);
+  for (const [label, hash] of destinations) {
+    const link = shortcuts.getByRole("link", { name: label, exact: true });
+    await link.focus();
+    await expect(link.locator(".hero-tile-tooltip")).toHaveCSS("opacity", "1");
+    await page.keyboard.press("Enter");
+    await expect.poll(() => new URL(page.url()).hash).toBe(hash);
+    await page
+      .getByRole("link", { name: "Raymond Quan home", exact: true })
+      .focus();
+    await page.keyboard.press("Enter");
+  }
+  await expect(page.locator(".hero-avatar")).toHaveAttribute(
+    "src",
+    "/raymond-avatar.png?v=20261011",
+  );
+});

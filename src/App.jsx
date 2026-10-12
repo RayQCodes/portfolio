@@ -220,7 +220,7 @@ export default function App() {
               </div>
             </motion.div>
             <motion.div
-              className={`hero-visual ${hero.visible && !hero.reduced ? "hero-alive" : ""}`}
+              className={`hero-visual portrait-stage ${hero.visible && !hero.reduced ? "hero-alive" : ""}`}
               style={hero.reduced ? {} : { x: hero.x, y: hero.y }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -232,17 +232,53 @@ export default function App() {
                 <i />
                 <i />
               </div>
-              <div className="floating-tile tile-cloud" aria-hidden="true">
-                <Cloud />
-              </div>
-              <div className="floating-tile tile-code" aria-hidden="true">
-                <Code2 />
-              </div>
-              <div className="floating-tile tile-data" aria-hidden="true">
-                <Database />
-              </div>
-              <div className="floating-tile tile-shield" aria-hidden="true">
-                <Shield />
+              <div
+                className="hero-shortcuts"
+                role="group"
+                aria-label="Hero technology shortcuts"
+              >
+                {[
+                  {
+                    className: "tile-cloud",
+                    href: "#architecture",
+                    label: "Explore AWS infrastructure",
+                    tooltip: "AWS infrastructure",
+                    icon: Cloud,
+                  },
+                  {
+                    className: "tile-code",
+                    href: "#skills",
+                    label: "Explore Spring Boot and backend skills",
+                    tooltip: "Spring Boot & APIs",
+                    icon: Code2,
+                  },
+                  {
+                    className: "tile-data",
+                    href: "#project-quiz",
+                    label: "Explore the SQL-backed application",
+                    tooltip: "SQL-backed application",
+                    icon: Database,
+                  },
+                  {
+                    className: "tile-shield",
+                    href: "#architecture",
+                    label: "Explore cloud security boundaries",
+                    tooltip: "Cloud security",
+                    icon: Shield,
+                  },
+                ].map(({ className, href, label, tooltip, icon: Icon }) => (
+                  <a
+                    key={className}
+                    className={`floating-tile ${className}`}
+                    href={href}
+                    aria-label={label}
+                  >
+                    <Icon aria-hidden="true" />
+                    <span className="hero-tile-tooltip" aria-hidden="true">
+                      {tooltip}
+                    </span>
+                  </a>
+                ))}
               </div>
               <img
                 className="hero-avatar"
