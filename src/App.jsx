@@ -148,10 +148,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65 }}
             >
-              <p className="eyebrow">
-                Raymond Quan{" "}
-                <span className="career-direction">· Career direction</span>
-              </p>
+              <p className="eyebrow">Raymond Quan</p>
               <h1 id="hero-title">
                 <motion.span
                   className="headline-line"
@@ -180,10 +177,9 @@ export default function App() {
                 </motion.span>
               </h1>
               <p className="hero-subtitle">
-                Building secure, scalable, and impactful cloud solutions with{" "}
-                <strong>AWS</strong>, <strong>Java</strong>,{" "}
-                <strong>Spring Boot</strong>, and modern software engineering
-                practices.
+                Building secure, scalable cloud applications with{" "}
+                <strong>AWS</strong> and <strong>Spring Boot</strong>, grounded
+                in Java fundamentals and a drive to keep learning.
               </p>
               <div className="hero-buttons">
                 <a
@@ -224,7 +220,7 @@ export default function App() {
               </div>
             </motion.div>
             <motion.div
-              className={`hero-visual ${hero.visible && !hero.reduced ? "hero-alive" : ""}`}
+              className={`hero-visual portrait-stage ${hero.visible && !hero.reduced ? "hero-alive" : ""}`}
               style={hero.reduced ? {} : { x: hero.x, y: hero.y }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -236,17 +232,53 @@ export default function App() {
                 <i />
                 <i />
               </div>
-              <div className="floating-tile tile-cloud" aria-hidden="true">
-                <Cloud />
-              </div>
-              <div className="floating-tile tile-code" aria-hidden="true">
-                <Code2 />
-              </div>
-              <div className="floating-tile tile-data" aria-hidden="true">
-                <Database />
-              </div>
-              <div className="floating-tile tile-shield" aria-hidden="true">
-                <Shield />
+              <div
+                className="hero-shortcuts"
+                role="group"
+                aria-label="Hero technology shortcuts"
+              >
+                {[
+                  {
+                    className: "tile-cloud",
+                    href: "#architecture",
+                    label: "Explore AWS infrastructure",
+                    tooltip: "AWS infrastructure",
+                    icon: Cloud,
+                  },
+                  {
+                    className: "tile-code",
+                    href: "#skills",
+                    label: "Explore Spring Boot and backend skills",
+                    tooltip: "Spring Boot & APIs",
+                    icon: Code2,
+                  },
+                  {
+                    className: "tile-data",
+                    href: "#project-quiz",
+                    label: "Explore the SQL-backed application",
+                    tooltip: "SQL-backed application",
+                    icon: Database,
+                  },
+                  {
+                    className: "tile-shield",
+                    href: "#architecture",
+                    label: "Explore cloud security boundaries",
+                    tooltip: "Cloud security",
+                    icon: Shield,
+                  },
+                ].map(({ className, href, label, tooltip, icon: Icon }) => (
+                  <a
+                    key={className}
+                    className={`floating-tile ${className}`}
+                    href={href}
+                    aria-label={label}
+                  >
+                    <Icon aria-hidden="true" />
+                    <span className="hero-tile-tooltip" aria-hidden="true">
+                      {tooltip}
+                    </span>
+                  </a>
+                ))}
               </div>
               <img
                 className="hero-avatar"
@@ -282,7 +314,9 @@ export default function App() {
               <p>
                 I'm Raymond, a Cybersecurity Engineering student at George Mason
                 University. I bring a security mindset to backend engineering,
-                cloud architecture, and data-driven applications.
+                cloud architecture, and data-driven applications. I’m eager to
+                deepen my AWS and Spring Boot skills, learn from experienced
+                engineers, and apply feedback to real projects.
               </p>
               <p>
                 From integrating behavioral bot detection on AWS to building
@@ -367,7 +401,6 @@ export default function App() {
           <a className="brand" href="#home">
             <span className="monogram">RQ</span>Raymond Quan
           </a>
-          <p>Cloud. Code. Security.</p>
           <a href="#home">
             Back to top <ArrowUpRight size={16} aria-hidden="true" />
           </a>

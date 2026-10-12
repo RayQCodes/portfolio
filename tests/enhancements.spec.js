@@ -25,10 +25,10 @@ test("approved portrait, navigation targets, resume and project URL are preserve
       .digest("hex"),
   ).toBe("faf4502e23b9ed76d7d4e960082661d5b80257af73dd35fc92d74cef7df53b52");
   await expect(page.locator(".hero-subtitle")).toContainText(
-    "AWS, Java, Spring Boot",
+    "AWS and Spring Boot",
   );
-  await expect(page.locator(".career-direction")).toContainText(
-    "Career direction",
+  await expect(page.locator(".hero-text > .eyebrow")).toHaveText(
+    "Raymond Quan",
   );
   const broken = await page
     .locator('a[href^="#"]')
@@ -152,11 +152,24 @@ test("Spring lifecycle pauses offscreen and can restart cleanly", async ({
   await expect(page.locator(".simulation-status")).toContainText("200 OK");
 });
 
-test("Java concepts highlight real code and the method demo handles valid and unknown options", async ({
+test("Java fundamentals highlight real code and validation handles valid and unknown options", async ({
   page,
 }) => {
   await enterSkills(page);
+  await expect(page.locator(".featured-tech h3")).toHaveText([
+    "AWS",
+    "Spring Boot",
+    "Java",
+  ]);
   await explore(page, "Java").click();
+  await expect(
+    page
+      .getByRole("group", { name: "Java concepts", exact: true })
+      .getByRole("button"),
+  ).toHaveCount(4);
+  await expect(
+    page.getByRole("button", { name: "Method invocation", exact: true }),
+  ).toHaveCount(0);
   await expect(
     featured(page).getByLabel("Complete Java validation example", {
       exact: true,
@@ -310,4 +323,36 @@ test("mobile widths, theme persistence, navigation and reduced-motion interactio
     page.getByRole("button", { name: "Open navigation", exact: true }),
   ).toHaveAttribute("aria-expanded", "false");
   await expect(page).toHaveURL(/#skills$/);
+});
+
+test("hero technology shortcuts support keyboard exploration without replacing the portrait", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const shortcuts = page.getByRole("group", {
+    name: "Hero technology shortcuts",
+    exact: true,
+  });
+  const destinations = [
+    ["Explore AWS infrastructure", "#architecture"],
+    ["Explore Spring Boot and backend skills", "#skills"],
+    ["Explore the SQL-backed application", "#project-quiz"],
+    ["Explore cloud security boundaries", "#architecture"],
+  ];
+  await expect(shortcuts.getByRole("link")).toHaveCount(4);
+  for (const [label, hash] of destinations) {
+    const link = shortcuts.getByRole("link", { name: label, exact: true });
+    await link.focus();
+    await expect(link.locator(".hero-tile-tooltip")).toHaveCSS("opacity", "1");
+    await page.keyboard.press("Enter");
+    await expect.poll(() => new URL(page.url()).hash).toBe(hash);
+    await page
+      .getByRole("link", { name: "Raymond Quan home", exact: true })
+      .focus();
+    await page.keyboard.press("Enter");
+  }
+  await expect(page.locator(".hero-avatar")).toHaveAttribute(
+    "src",
+    "/raymond-avatar.png?v=20261011",
+  );
 });
